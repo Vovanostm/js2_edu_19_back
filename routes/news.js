@@ -1,29 +1,20 @@
 var express = require("express")
 var router = express.Router()
-let news = [
-  {
-    title: "Сервер",
-    text: "Ура, сложный сервер заработал",
-    img: ""
-  },
-  {
-    title: "Страшно",
-    text: "Много кода",
-    img: ""
-  }
-]
+const News = require("../models/news")
 
 // Получить все новости
 router.get("/", (req, res) => {
-  res.send(news)
+  News.find().then(news => {
+    res.send(news)
+  })
 })
 
 // Добавить 1 новость
 router.put("/", (req, res) => {
-  let nw = req.body
-  news.push(nw)
-  nw.id = news.length
-  res.send(nw)
+  let news = new News(req.body)
+  news.save().then(news => {
+    res.send(news)
+  })
 })
 
 module.exports = router
