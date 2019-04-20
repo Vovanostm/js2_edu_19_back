@@ -6,6 +6,7 @@ function route(app) {
   app.use("/news", news)
   app.use("/auth", auth)
   app.use("/users", users)
+  app.use("/uploads", require("./uploads"))
 }
 
 module.exports = route
