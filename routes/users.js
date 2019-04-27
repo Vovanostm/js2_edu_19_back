@@ -1,7 +1,15 @@
 var express = require("express")
 var router = express.Router()
 const Users = require("../models/users")
-const jwt = require("jsonwebtoken")
+const { check_auth } = require("../middleware/auth")
+
+router.get("/", check_auth, (req, res) => {
+  Users.find({})
+    .select("username")
+    .then(users => {
+      res.send(users)
+    })
+})
 
 // Залогиниться - найти пользователя, сверить пароль с БД
 router.post("/", (req, res) => {
