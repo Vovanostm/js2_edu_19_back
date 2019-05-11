@@ -1,7 +1,7 @@
 var express = require("express")
 var router = express.Router()
 const News = require("../models/news")
-const {check_auth} = require("../middleware/auth")
+const { check_auth } = require("../middleware/auth")
 
 // Получить все новости
 router.get("/", check_auth, (req, res) => {
